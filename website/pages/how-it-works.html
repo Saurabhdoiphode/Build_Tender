@@ -1,0 +1,1220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How It Works - BuildTender</title>
+    <link rel="stylesheet" href="../assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* =====================
+           KEYFRAME ANIMATIONS
+           ===================== */
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes scaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.85) rotateX(10deg);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) rotateX(0deg);
+            }
+        }
+
+        @keyframes rotateIn {
+            from {
+                opacity: 0;
+                transform: rotate(-10deg) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: rotate(0deg) scale(1);
+            }
+        }
+
+        @keyframes shimmerFlow {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+
+        @keyframes floatUp {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-15px);
+            }
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        @keyframes waveFlow {
+            0% {
+                background-position: 0% 50%;
+            }
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% {
+                box-shadow: 0 0 5px rgba(102, 126, 234, 0.4),
+                            0 5px 20px rgba(102, 126, 234, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 30px rgba(255, 107, 53, 0.6),
+                            0 10px 40px rgba(255, 107, 53, 0.3);
+            }
+        }
+
+        @keyframes tiltShake {
+            0%, 100% {
+                transform: rotateZ(-2deg);
+            }
+            25% {
+                transform: rotateZ(2deg);
+            }
+            50% {
+                transform: rotateZ(-1deg);
+            }
+            75% {
+                transform: rotateZ(1deg);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        @keyframes colorShift {
+            0%, 100% {
+                border-color: rgba(255, 107, 53, 0.1);
+                background: linear-gradient(-45deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            }
+            50% {
+                border-color: rgba(255, 107, 53, 0.5);
+                background: linear-gradient(-45deg, #764ba2 0%, #667eea 50%, #764ba2 100%);
+            }
+        }
+
+        @keyframes pingPulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 20px rgba(255, 107, 53, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0);
+            }
+        }
+
+        .detailed-process {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #ffffff 0%, #f9f9f9 100%);
+        }
+
+        .detailed-process h2 {
+            animation: slideInDown 0.8s ease forwards;
+            position: relative;
+        }
+
+        .detailed-process h2::before {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+            animation: slideInDown 0.8s ease 0.2s forwards;
+        }
+        
+        .process-phases {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 24px;
+            margin-bottom: 80px;
+        }
+        
+        .phase-card {
+            background: linear-gradient(-45deg, #667eea 0%, #764ba2 50%, #667eea 100%);
+            background-size: 400% 400%;
+            color: white;
+            padding: 28px;
+            border-radius: 14px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            opacity: 0;
+            animation: scaleUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .phase-card:nth-child(1) { animation-delay: 0.1s; }
+        .phase-card:nth-child(2) { animation-delay: 0.2s; }
+        .phase-card:nth-child(3) { animation-delay: 0.3s; }
+        .phase-card:nth-child(4) { animation-delay: 0.4s; }
+        .phase-card:nth-child(5) { animation-delay: 0.5s; }
+        .phase-card:nth-child(6) { animation-delay: 0.6s; }
+
+        .phase-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+            transform: translateX(-100%);
+            animation: shimmerFlow 3s infinite;
+            pointer-events: none;
+        }
+
+        .phase-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at center, rgba(255,107,53,0.1) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .phase-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(102, 126, 234, 0.4);
+            border-color: rgba(255, 255, 255, 0.5);
+            animation: colorShift 2s ease infinite;
+        }
+
+        .phase-card:hover::after {
+            opacity: 1;
+        }
+
+        .phase-card:hover .phase-number {
+            animation: pulse 0.6s ease-in-out infinite;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .phase-card:hover .phase-title {
+            animation: float 2s ease-in-out infinite;
+        }
+
+        .phase-card:active {
+            transform: translateY(-10px) scale(0.98);
+        }
+        
+        .phase-number {
+            font-size: 3rem;
+            font-weight: 900;
+            opacity: 0.25;
+            margin-bottom: 10px;
+            transition: all 0.3s ease;
+            animation: floatUp 3s ease-in-out infinite;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .phase-title {
+            font-size: 1.35rem;
+            margin-bottom: 14px;
+            transition: all 0.3s ease;
+            font-weight: 700;
+        }
+        
+        .phase-description {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            transition: all 0.3s ease;
+            opacity: 0.95;
+        }
+        
+        .phase-list {
+            list-style: none;
+            margin-top: 18px;
+        }
+        
+        .phase-list li {
+            padding: 8px 0;
+            padding-left: 26px;
+            position: relative;
+            opacity: 0;
+            animation: fadeInLeft 0.6s ease forwards;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            font-size: 0.92rem;
+        }
+
+        .phase-list li:nth-child(1) { animation-delay: 0.3s; }
+        .phase-list li:nth-child(2) { animation-delay: 0.4s; }
+        .phase-list li:nth-child(3) { animation-delay: 0.5s; }
+        
+        .phase-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #FFD700;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+        }
+
+        .phase-card:hover .phase-list li:before {
+            animation: float 2s ease-in-out infinite;
+            font-size: 1.5rem;
+        }
+
+        .phase-card:hover .phase-list li {
+            transform: translateX(5px);
+        }
+
+        @media (max-width: 1200px) {
+            .process-phases {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .process-phases {
+                grid-template-columns: 1fr;
+            }
+
+            .phase-card {
+                padding: 24px;
+            }
+        }
+
+        .verification-info {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 80px 40px;
+            border-radius: 20px;
+            margin: 100px 0;
+            border-left: 6px solid var(--primary-color);
+            opacity: 0;
+            animation: slideInUp 0.8s ease forwards;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .verification-info::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 6px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 20px 20px 0 0;
+            animation: waveFlow 3s ease infinite;
+        }
+
+        .verification-info h2 {
+            animation: slideInDown 0.8s ease forwards;
+            animation-delay: 0.2s;
+            opacity: 0;
+            font-size: 2.2rem;
+        }
+
+        .verification-info > p {
+            animation: fadeInUp 0.8s ease forwards;
+            animation-delay: 0.3s;
+            opacity: 0;
+            font-size: 1.1rem;
+        }
+        
+        .verification-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .verification-item {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            opacity: 0;
+            animation: slideInUp 0.6s ease forwards;
+            border: 2px solid transparent;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .verification-item::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.2), transparent);
+            transition: left 0.6s;
+        }
+
+        .verification-item:nth-child(1) { animation-delay: 0.5s; }
+        .verification-item:nth-child(2) { animation-delay: 0.65s; }
+        .verification-item:nth-child(3) { animation-delay: 0.8s; }
+
+        .verification-item:hover {
+            transform: translateY(-12px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.2);
+            border-color: var(--primary-color);
+            background: linear-gradient(135deg, #ffffff 0%, #fff5f0 100%);
+        }
+
+        .verification-item:hover::before {
+            left: 100%;
+        }
+        
+        .verification-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .verification-item i {
+            font-size: 1.8rem;
+            animation: rotate 4s linear infinite;
+            transition: all 0.3s ease;
+        }
+
+        .verification-item:hover i {
+            animation: rotate 1s linear infinite;
+            color: var(--accent-color);
+        }
+
+        .verification-item p {
+            font-size: 0.95rem;
+            color: #666;
+            line-height: 1.8;
+        }
+        
+        .payment-flow {
+            background: linear-gradient(135deg, var(--light-color) 0%, #e9ecef 100%);
+            padding: 80px 40px;
+            border-radius: 20px;
+            margin: 100px 0;
+            opacity: 0;
+            animation: slideInUp 0.8s ease forwards;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .payment-flow::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255, 107, 53, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .payment-flow h2 {
+            animation: slideInDown 0.8s ease forwards;
+            animation-delay: 0.2s;
+            opacity: 0;
+        }
+        
+        .payment-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .payment-step {
+            background: white;
+            padding: 35px 25px;
+            border-radius: 15px;
+            text-align: center;
+            border: 3px solid var(--primary-color);
+            opacity: 0;
+            animation: bounceIn 0.7s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) rotateZ(-10deg);
+            }
+            50% {
+                transform: scale(1.15) rotateZ(5deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotateZ(0deg);
+            }
+        }
+
+        .payment-step:nth-child(1) { animation-delay: 0.4s; }
+        .payment-step:nth-child(2) { animation-delay: 0.55s; }
+        .payment-step:nth-child(3) { animation-delay: 0.7s; }
+        .payment-step:nth-child(4) { animation-delay: 0.85s; }
+        .payment-step:nth-child(5) { animation-delay: 1s; }
+
+        .payment-step::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 107, 53, 0.15), transparent);
+            transition: left 0.6s;
+            z-index: 1;
+        }
+
+        .payment-step:hover {
+            transform: translateY(-15px) scale(1.05);
+            box-shadow: 0 20px 50px rgba(255, 107, 53, 0.25);
+            border-color: var(--accent-color);
+            background: linear-gradient(135deg, #ffffff 0%, #fff5f0 100%);
+        }
+
+        .payment-step:hover::before {
+            left: 100%;
+        }
+        
+        .payment-step .step-number {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            color: white;
+            font-weight: bold;
+            font-size: 1.8rem;
+            animation: pulse 2s ease-in-out infinite;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 5px 20px rgba(255, 107, 53, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .payment-step:hover .step-number {
+            animation: pingPulse 1.5s ease-out;
+        }
+
+        .payment-step h4 {
+            font-weight: 700;
+            font-size: 1.15rem;
+            margin-bottom: 10px;
+            color: var(--text-color);
+        }
+
+        .payment-step p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+
+        .payment-flow > div:last-child {
+            opacity: 0;
+            animation: slideInUp 0.8s ease forwards;
+            animation-delay: 1.2s;
+            position: relative;
+            z-index: 1;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 5px solid var(--primary-color);
+        }
+
+        .payment-flow > div:last-child h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+        }
+
+        .payment-flow > div:last-child li {
+            opacity: 0;
+            animation: fadeInLeft 0.6s ease forwards;
+        }
+
+        .payment-flow > div:last-child li:nth-child(1) { animation-delay: 1.3s; }
+        .payment-flow > div:last-child li:nth-child(2) { animation-delay: 1.4s; }
+        .payment-flow > div:last-child li:nth-child(3) { animation-delay: 1.5s; }
+        .payment-flow > div:last-child li:nth-child(4) { animation-delay: 1.6s; }
+
+        .payment-flow > div:last-child li span {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-logo">
+                <h1><i class="fas fa-building"></i> BuildTender</h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="../index.html#home">Home</a></li>
+                <li><a href="#process">How It Works</a></li>
+                <li><a href="#verification">Verification</a></li>
+                <li><a href="#payment">Payment</a></li>
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>How BuildTender Works</h1>
+                <p>A step-by-step guide to transforming your construction project from start to finish.</p>
+                <div class="hero-buttons">
+                    <a class="btn btn-primary" href="../index.html#contact">Get Started</a>
+                    <a class="btn btn-secondary" href="#process">Learn More</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="placeholder-box">
+                    <i class="fas fa-home"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Detailed Process Section -->
+    <section id="process" class="detailed-process">
+        <div class="container">
+            <h2>The Complete 20-Step Process</h2>
+            
+            <div class="process-phases">
+                <!-- Phase 1 -->
+                <div class="phase-card">
+                    <div class="phase-number">01</div>
+                    <div class="phase-title">House Owner Registration</div>
+                    <div class="phase-description">
+                        House owner registers with basic details and creates an account.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Submit personal information</li>
+                        <li>Email verification</li>
+                        <li>Login to dashboard</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 2 -->
+                <div class="phase-card">
+                    <div class="phase-number">02</div>
+                    <div class="phase-title">Tender Request Submission</div>
+                    <div class="phase-description">
+                        Submit detailed project requirements including scope, timeline, and specifications.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Project description</li>
+                        <li>Upload building plans</li>
+                        <li>Specify requirements</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 3 -->
+                <div class="phase-card">
+                    <div class="phase-number">03</div>
+                    <div class="phase-title">Verify Admin Review</div>
+                    <div class="phase-description">
+                        Our verification team checks all documents and project requirements for completeness.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Document verification</li>
+                        <li>Requirement analysis</li>
+                        <li>Approval or correction</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 4 -->
+                <div class="phase-card">
+                    <div class="phase-number">04</div>
+                    <div class="phase-title">Budget Estimation</div>
+                    <div class="phase-description">
+                        Budget Admin prepares detailed cost estimation within 24 hours.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Material cost analysis</li>
+                        <li>Labor estimation</li>
+                        <li>Detailed breakdown</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 5 -->
+                <div class="phase-card">
+                    <div class="phase-number">05</div>
+                    <div class="phase-title">Budget Verification</div>
+                    <div class="phase-description">
+                        Verify Admin reviews and approves the budget estimate.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Budget review</li>
+                        <li>Adjustments if needed</li>
+                        <li>Final approval</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 6 -->
+                <div class="phase-card">
+                    <div class="phase-number">06</div>
+                    <div class="phase-title">House Owner Approval</div>
+                    <div class="phase-description">
+                        House owner reviews and approves the budget to proceed.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Review estimates</li>
+                        <li>Confirm readiness</li>
+                        <li>Proceed to next step</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="process-phases">
+                <!-- Phase 7-8 -->
+                <div class="phase-card">
+                    <div class="phase-number">07-08</div>
+                    <div class="phase-title">Tender Upload & Partner Verification</div>
+                    <div class="phase-description">
+                        Tender is posted on platform while contractors and vendors are verified.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Tender goes live</li>
+                        <li>Partner verification</li>
+                        <li>Contractor bidding opens</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 9 -->
+                <div class="phase-card">
+                    <div class="phase-number">09</div>
+                    <div class="phase-title">Contractor Participation</div>
+                    <div class="phase-description">
+                        Verified contractors review tender and submit competitive bids.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Review project scope</li>
+                        <li>Submit detailed bids</li>
+                        <li>Include timeline</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 10 -->
+                <div class="phase-card">
+                    <div class="phase-number">10</div>
+                    <div class="phase-title">Contractor Selection</div>
+                    <div class="phase-description">
+                        House owner compares and selects the best contractor based on multiple criteria.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Compare bids</li>
+                        <li>Check ratings</li>
+                        <li>Make selection</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 11 -->
+                <div class="phase-card">
+                    <div class="phase-number">11</div>
+                    <div class="phase-title">Agreement & Bond Verification</div>
+                    <div class="phase-description">
+                        Contractors submit security bonds and agreements for verification.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Submit bonds</li>
+                        <li>Agreement signing</li>
+                        <li>Admin verification</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 12 -->
+                <div class="phase-card">
+                    <div class="phase-number">12</div>
+                    <div class="phase-title">Payment Initiation</div>
+                    <div class="phase-description">
+                        Payment process begins with milestone-based disbursement tracking.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Initial payment</li>
+                        <li>Milestone tracking</li>
+                        <li>Payment approval</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="process-phases">
+                <!-- Phase 13-14 -->
+                <div class="phase-card">
+                    <div class="phase-number">13-14</div>
+                    <div class="phase-title">Construction & Quality Inspections</div>
+                    <div class="phase-description">
+                        Construction begins with regular quality check inspections on site.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Work initiation</li>
+                        <li>Regular inspections</li>
+                        <li>Quality reports</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 15 -->
+                <div class="phase-card">
+                    <div class="phase-number">15</div>
+                    <div class="phase-title">Progress Monitoring</div>
+                    <div class="phase-description">
+                        Track real-time project progress and identify any delays immediately.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Update tracking</li>
+                        <li>Flag delays</li>
+                        <li>Coordinate adjustments</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 16 -->
+                <div class="phase-card">
+                    <div class="phase-number">16</div>
+                    <div class="phase-title">Material & Service Management</div>
+                    <div class="phase-description">
+                        Vendors deliver materials and service providers complete assigned tasks.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Materials delivery</li>
+                        <li>Service coordination</li>
+                        <li>Logging activities</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 17 -->
+                <div class="phase-card">
+                    <div class="phase-number">17</div>
+                    <div class="phase-title">Issue Resolution</div>
+                    <div class="phase-description">
+                        Any issues are recorded and resolved quickly with admin coordination.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Report issues</li>
+                        <li>Coordinate solutions</li>
+                        <li>Track resolution</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 18 -->
+                <div class="phase-card">
+                    <div class="phase-number">18</div>
+                    <div class="phase-title">Final Inspection</div>
+                    <div class="phase-description">
+                        Comprehensive final quality inspection and completion verification.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Quality verification</li>
+                        <li>Scope verification</li>
+                        <li>Completion report</li>
+                    </ul>
+                </div>
+
+                <!-- Phase 19-20 -->
+                <div class="phase-card">
+                    <div class="phase-number">19-20</div>
+                    <div class="phase-title">Payment & Feedback</div>
+                    <div class="phase-description">
+                        Final payment release and project feedback/rating collection.
+                    </div>
+                    <ul class="phase-list">
+                        <li>Final payment</li>
+                        <li>Project closure</li>
+                        <li>Ratings & feedback</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Verification Section -->
+    <section id="verification" class="verification-info">
+        <div class="container">
+            <h2 style="color: var(--text-color); text-align: left;">Our Verification Process</h2>
+            <p>Every participant in BuildTender goes through strict verification to ensure trust and quality.</p>
+            
+            <div class="verification-grid">
+                <div class="verification-item">
+                    <h4><i class="fas fa-home"></i> For House Owners</h4>
+                    <p>Identity verification and account validation to ensure genuine users.</p>
+                </div>
+                <div class="verification-item">
+                    <h4><i class="fas fa-helmet-safety"></i> For Contractors</h4>
+                    <p>Comprehensive verification including licenses, certifications, and project portfolio.</p>
+                </div>
+                <div class="verification-item">
+                    <h4><i class="fas fa-store"></i> For Vendors</h4>
+                    <p>Business registration, GST details, and product quality verification.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Payment Flow Section -->
+    <section id="payment" class="payment-flow">
+        <div class="container">
+            <h2 style="color: var(--text-color); text-align: left;">Payment Structure</h2>
+            
+            <div class="payment-steps">
+                <div class="payment-step">
+                    <div class="step-number">1</div>
+                    <h4>Tender Fee</h4>
+                    <p>Contractor pays ₹499 per tender submitted</p>
+                </div>
+                <div class="payment-step">
+                    <div class="step-number">2</div>
+                    <h4>Initial Payment</h4>
+                    <p>House owner makes first payment upon contractor selection</p>
+                </div>
+                <div class="payment-step">
+                    <div class="step-number">3</div>
+                    <h4>Milestone Payments</h4>
+                    <p>Payments released based on project milestones</p>
+                </div>
+                <div class="payment-step">
+                    <div class="step-number">4</div>
+                    <h4>Vendor Payments</h4>
+                    <p>10% advance + 90% Cash on Delivery for materials</p>
+                </div>
+                <div class="payment-step">
+                    <div class="step-number">5</div>
+                    <h4>Final Payment</h4>
+                    <p>Released after final inspection and approval</p>
+                </div>
+            </div>
+
+            <div style="margin-top: 40px; background: white; padding: 30px; border-radius: 8px;">
+                <h3>Key Payment Features</h3>
+                <ul style="list-style: none; margin-top: 20px;">
+                    <li style="padding: 10px 0; padding-left: 30px; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: bold;">✓</span>
+                        All payments tracked and verified by admin
+                    </li>
+                    <li style="padding: 10px 0; padding-left: 30px; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: bold;">✓</span>
+                        Secure payment processing
+                    </li>
+                    <li style="padding: 10px 0; padding-left: 30px; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: bold;">✓</span>
+                        Transparent billing and invoicing
+                    </li>
+                    <li style="padding: 10px 0; padding-left: 30px; position: relative;">
+                        <span style="position: absolute; left: 0; color: var(--primary-color); font-weight: bold;">✓</span>
+                        Protection against payment disputes
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>BuildTender</h4>
+                    <p>Transforming private home construction through transparent digital solutions.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="#process">How It Works</a></li>
+                        <li><a href="../index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Legal</h4>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 BuildTender. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../assets/js/script.js"></script>
+    
+    <!-- Enhanced Animations for How It Works Page -->
+    <script>
+        // =====================
+        // PARALLAX EFFECT
+        // =====================
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                hero.style.backgroundPosition = `center ${scrolled * 0.5}px`;
+            }
+        });
+
+        // =====================
+        // ENHANCED CARD HOVER EFFECTS
+        // =====================
+        document.querySelectorAll('.phase-card').forEach((card, index) => {
+            card.addEventListener('mouseenter', function() {
+                // Tilt effect
+                this.style.perspective = '1000px';
+                setTimeout(() => {
+                    this.style.transform += ' perspective(1000px) rotateX(5deg)';
+                }, 50);
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-15px) scale(1.05)';
+                setTimeout(() => {
+                    this.style.transform = 'translateY(0) scale(1)';
+                }, 100);
+            });
+
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+
+                const rotateX = ((y - centerY) / centerY) * 5;
+                const rotateY = ((centerX - x) / centerX) * 5;
+
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+            });
+        });
+
+        // =====================
+        // STAGGERED CARD ANIMATIONS ON SCROLL
+        // =====================
+        const phaseCards = document.querySelectorAll('.phase-card');
+        
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach((entry, index) => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = `scaleUp 0.7s cubic-bezier(0.34, 1.56, 0.64, 1) forwards`;
+                    entry.target.style.animationDelay = `${index * 0.1}s`;
+                }
+            });
+        }, { threshold: 0.1 });
+
+        phaseCards.forEach(card => cardObserver.observe(card));
+
+        // =====================
+        // VERIFICATION ITEMS ANIMATION
+        // =====================
+        const verificationItems = document.querySelectorAll('.verification-item');
+        
+        verificationItems.forEach((item, index) => {
+            item.addEventListener('mouseenter', function() {
+                this.style.animation = 'none';
+                setTimeout(() => {
+                    this.style.animation = `pingPulse 1.5s ease-out`;
+                }, 10);
+            });
+        });
+
+        // =====================
+        // PAYMENT STEPS ENHANCED EFFECTS
+        // =====================
+        const paymentSteps = document.querySelectorAll('.payment-step');
+        
+        paymentSteps.forEach((step) => {
+            step.addEventListener('mouseenter', function() {
+                const stepNum = this.querySelector('.step-number');
+                if (stepNum) {
+                    stepNum.style.animation = 'none';
+                    setTimeout(() => {
+                        stepNum.style.animation = 'pingPulse 1.5s ease-out';
+                    }, 10);
+                }
+            });
+        });
+
+        // =====================
+        // SCROLL COUNTER EFFECT
+        // =====================
+        let countAnimated = false;
+        window.addEventListener('scroll', () => {
+            const statsSection = document.querySelector('.payment-flow');
+            if (statsSection && !countAnimated) {
+                const rect = statsSection.getBoundingClientRect();
+                if (rect.top < window.innerHeight) {
+                    countAnimated = true;
+                    document.querySelectorAll('.payment-steps').forEach(el => {
+                        el.style.animation = 'slideInUp 0.8s ease forwards';
+                    });
+                }
+            }
+        });
+
+        // =====================
+        // SMOOTH SCROLL NAVIGATION
+        // =====================
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const href = this.getAttribute('href');
+                if (href !== '#' && document.querySelector(href)) {
+                    e.preventDefault();
+                    document.querySelector(href).scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // =====================
+        // HERO SECTION ANIMATION ON LOAD
+        // =====================
+        window.addEventListener('load', () => {
+            const heroContent = document.querySelector('.hero-content');
+            if (heroContent) {
+                heroContent.querySelectorAll('h1, p').forEach((el, index) => {
+                    el.style.animation = 'slideInDown 0.8s ease forwards';
+                    el.style.animationDelay = `${index * 0.2}s`;
+                });
+            }
+        });
+
+        // =====================
+        // ACTIVE LINK HIGHLIGHT
+        // =====================
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section[id]');
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 60) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('.nav-menu a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').slice(1) === current) {
+                    link.classList.add('active');
+                    link.style.animation = 'glow 2s ease-in-out infinite';
+                }
+            });
+        });
+
+        // =====================
+        // ANIMATION RESET ON RESIZE
+        // =====================
+        window.addEventListener('resize', () => {
+            phaseCards.forEach(card => {
+                card.style.transform = 'none';
+            });
+        });
+    </script>
